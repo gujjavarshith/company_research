@@ -1,35 +1,39 @@
-gather_company_info
-    description: >
-      Gather all basic company details — including description, founders, HQ, products, and mission.
-    agent: company_info_agent
-    output_file: data/company_info.json
+gather_company_info:
+  description: >
+    Gather comprehensive details about the company, including founders, headquarters, key executives, number of employees, industry, and subsidiaries.
+  expected_output: >
+    A structured summary (JSON or text) containing verified factual data about the company.
+  agent: company_info_agent
 
-analyze_financials
-    description: >
-      Research the company’s revenue, profit, growth rate, funding rounds, stock performance, and investor information.
-    agent: financial_analyst_agent
-    output_file: data/financials.json
+analyze_financials:
+  description: >
+    Analyze the company's financial performance, funding history, stock data, and key metrics.
+  expected_output: >
+    Financial insights summarizing revenue, valuation, stock trends, and major funding events.
+  agent: financial_analyst_agent
 
-analyze_market_position
-    description: >
-      Identify competitors, perform SWOT analysis, and analyze the company’s position in its market.
-    agent: market_analyst_agent
-    output_file: data/market_analysis.json
+analyze_market_position:
+  description: >
+    Identify competitors, perform SWOT analysis, and provide insights into the company’s market positioning and opportunities.
+  expected_output: >
+    A concise summary of competitors, SWOT matrix, and strategic market insights.
+  agent: market_analyst_agent
 
-analyze_sentiment
-    description: >
-      Gather media mentions, public opinion, and summarize overall sentiment around the company in the last 12 months.
-    agent: sentiment_agent
-    output_file: data/sentiment.json
+analyze_sentiment:
+  description: >
+    Analyze the sentiment of recent news and public discussions about the company using online sources.
+  expected_output: >
+    Sentiment score (positive/negative/neutral) and summary of supporting evidence.
+  agent: sentiment_agent
 
-generate_report
-    description: >
-      Combine all gathered data into a single structured, detailed company report with proper sections and insights.
-    agent: report_writer_agent
-    input_files:
-      - data/report_format.md
-      - data/company_info.json
-      - data/financials.json
-      - data/market_analysis.json
-      - data/sentiment.json
-    output_file: reports/{company_name}_report.md
+generate_report:
+  description: >
+    Combine all findings from previous tasks into a comprehensive report containing Overview, Financials, Market, Sentiment, and Conclusion sections.
+  expected_output: >
+    A final professional company report formatted in Markdown.
+  agent: report_writer_agent
+  depends_on:
+    - gather_company_info
+    - analyze_financials
+    - analyze_market_position
+    - analyze_sentiment
