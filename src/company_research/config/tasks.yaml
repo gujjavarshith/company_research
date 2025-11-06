@@ -4,6 +4,8 @@ gather_company_info:
   expected_output: >
     A structured summary (JSON or text) containing verified factual data about the company.
   agent: company_info_agent
+  output_file: data/company_info.json
+
 
 analyze_financials:
   description: >
@@ -11,6 +13,8 @@ analyze_financials:
   expected_output: >
     Financial insights summarizing revenue, valuation, stock trends, and major funding events.
   agent: financial_analyst_agent
+  output_file: data/financials.json
+
 
 analyze_market_position:
   description: >
@@ -18,6 +22,7 @@ analyze_market_position:
   expected_output: >
     A concise summary of competitors, SWOT matrix, and strategic market insights.
   agent: market_analyst_agent
+  output_file: data/market_analysis.json
 
 analyze_sentiment:
   description: >
@@ -25,6 +30,7 @@ analyze_sentiment:
   expected_output: >
     Sentiment score (positive/negative/neutral) and summary of supporting evidence.
   agent: sentiment_agent
+  output_file: data/sentiment.json
 
 generate_report:
   description: >
@@ -32,6 +38,12 @@ generate_report:
   expected_output: >
     A final professional company report formatted in Markdown.
   agent: report_writer_agent
+  input_files:
+    - data/company_info.json
+    - data/financials.json
+    - data/market_analysis.json
+    - data/sentiment.json
+  output_file: reports/{company_name}_report.md
   depends_on:
     - gather_company_info
     - analyze_financials
