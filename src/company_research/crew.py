@@ -20,16 +20,35 @@ class CompanyResearch():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def company_info_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
+            config=self.agents_config['company_info_agent'], # type: ignore[index]
             verbose=True
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def financial_analyst_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
+            config=self.agents_config['financial_analyst_agent'], # type: ignore[index]
+            verbose=True
+        )
+
+    @agent
+    def market_analyst_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['market_analyst_agent'], # type: ignore[index]
+            verbose=True
+        )
+    @agent
+    def sentiment_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['sentiment_agent'], # type: ignore[index]
+            verbose=True
+        )
+    @agent
+    def report_writer_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['report_writer_agent'], # type: ignore[index]
             verbose=True
         )
 
@@ -37,16 +56,34 @@ class CompanyResearch():
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
+    def gather_company_info(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['gather_company_info'], # type: ignore[index]
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def analyze_financials(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
+            config=self.tasks_config['analyze_financials'], # type: ignore[index]
             output_file='report.md'
+        )
+
+    @task
+    def analyze_market_position(self) -> Task:
+        return Task(
+            config=self.tasks_config['analyze_market_position'], # type: ignore[index]
+        )
+
+    @task
+    def analyze_sentiment(self) -> Task:
+        return Task(
+            config=self.tasks_config['analyze_sentiment'], # type: ignore[index]
+        )
+
+    @task
+    def generate_report(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_report'], # type: ignore[index]
         )
 
     @crew
