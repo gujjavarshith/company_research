@@ -1,15 +1,15 @@
 gather_company_info:
   description: >
-    Gather comprehensive details about the company, including founders, headquarters, key executives, number of employees, industry, and subsidiaries.
+    Gather comprehensive details about the {topic} company, including founders, headquarters, key executives, number of employees, industry, and subsidiaries.
   expected_output: >
-    A structured summary (JSON or text) containing verified factual data about the company.
+    A structured summary (JSON or text) containing verified factual data about the {topic}.
   agent: company_info_agent
   output_file: data/company_info.json
 
 
 analyze_financials:
   description: >
-    Analyze the company's financial performance, funding history, stock data, and key metrics.
+    Analyze the {topic} company's financial performance, funding history, stock data, and key metrics.
   expected_output: >
     Financial insights summarizing revenue, valuation, stock trends, and major funding events.
   agent: financial_analyst_agent
@@ -18,7 +18,7 @@ analyze_financials:
 
 analyze_market_position:
   description: >
-    Identify competitors, perform SWOT analysis, and provide insights into the company’s market positioning and opportunities.
+    Identify competitors, perform SWOT analysis, and provide insights into the {topic} company’s market positioning and opportunities.
   expected_output: >
     A concise summary of competitors, SWOT matrix, and strategic market insights.
   agent: market_analyst_agent
@@ -26,7 +26,7 @@ analyze_market_position:
 
 analyze_sentiment:
   description: >
-    Analyze the sentiment of recent news and public discussions about the company using online sources.
+    Analyze the sentiment of recent news and public discussions about the {topic} company using online sources.
   expected_output: >
     Sentiment score (positive/negative/neutral) and summary of supporting evidence.
   agent: sentiment_agent
@@ -36,14 +36,14 @@ generate_report:
   description: >
     Combine all findings from previous tasks into a comprehensive report containing Overview, Financials, Market, Sentiment, and Conclusion sections.
   expected_output: >
-    A final professional company report formatted in Markdown.
+    A final professional {topic} report formatted in Markdown.
   agent: report_writer_agent
   input_files:
     - data/company_info.json
     - data/financials.json
     - data/market_analysis.json
     - data/sentiment.json
-  output_file: reports/{company_name}_report.md
+  output_file: reports/{topic}_report.md
   depends_on:
     - gather_company_info
     - analyze_financials
