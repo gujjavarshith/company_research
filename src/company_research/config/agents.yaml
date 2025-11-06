@@ -6,9 +6,7 @@ company_info_agent
     tools:
       - serp_api_tool
       - wikipedia_tool
-    llm:
-      provider: openai
-      model: gpt-4o-mini
+    llm:gemini/gemini-2.5-flash
 
 financial_analyst_agent
     role: "Financial Analyst"
@@ -18,9 +16,7 @@ financial_analyst_agent
     tools:
       - yahoo_finance_tool
       - serp_api_tool
-    llm:
-      provider: openai
-      model: gpt-4o-mini
+    llm:gemini/gemini-2.5-flash
 
 market_analyst_agent
     role: "Market & Competitor Analyst"
@@ -30,9 +26,7 @@ market_analyst_agent
     tools:
       - serp_api_tool
       - google_trends_tool
-    llm:
-      provider: openai
-      model: gpt-4o-mini
+    llm:gemini/gemini-2.5-flash
 
 sentiment_agent
     role: "Sentiment Analyst"
@@ -42,9 +36,7 @@ sentiment_agent
     tools:
       - news_api_tool
       - twitter_scraper_tool
-    llm:
-      provider: openai
-      model: gpt-4o-mini
+    llm:gemini/gemini-2.5-flash
 
 report_writer_agent
     role: "Corporate Intelligence Writer"
@@ -52,6 +44,4 @@ report_writer_agent
     backstory: >
       You are a professional analyst who consolidates research into well-formatted reports with clear sections and references.
     tools: []
-    llm:
-      provider: openai
-      model: gpt-4-turbo
+    llm:gemini/gemini-2.5-flash
