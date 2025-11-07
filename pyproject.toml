@@ -1,11 +1,22 @@
 [project]
 name = "company_research"
 version = "0.1.0"
-description = "company_research using crewAI"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "Company Research agent using CrewAI"
+authors = [{ name = "Srivarshith Rao", email = "srivarshith@iiit.ac.in" }]
 requires-python = ">=3.10,<3.14"
+
 dependencies = [
-    "crewai[tools]>=0.165.1,<1.0.0"
+    # --- Core CrewAI ---
+    "crewai[tools]>=0.165.1,<1.0.0",
+
+    # --- Wikipedia tools ---
+    "wikipedia>=1.4.0",
+    "wikipedia-api>=0.8.1",
+
+    # --- Optional helpers / APIs ---
+    "yfinance>=0.2.40",           # For Yahoo Finance fallback
+    "requests>=2.32.0",           # Needed for Wikipedia + APIs
+    "beautifulsoup4>=4.13.0"      # For parsing (used by wikipedia)
 ]
 
 [project.scripts]

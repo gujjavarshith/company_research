@@ -25,7 +25,6 @@ market_analyst_agent:
     You are a market strategist specializing in competitive analysis and trend discovery.
   tools:
     - serp_api_tool
-    - google_trends_tool
   llm: gemini/gemini-2.5-flash
 
 sentiment_agent:
@@ -35,7 +34,6 @@ sentiment_agent:
     You specialize in NLP-driven sentiment and tone analysis to interpret public perception of organizations.
   tools:
     - news_api_tool
-    - twitter_scraper_tool
   llm: gemini/gemini-2.5-flash
 
 report_writer_agent:
