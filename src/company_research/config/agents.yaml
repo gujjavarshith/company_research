@@ -4,7 +4,7 @@ company_info_agent:
   backstory: >
     You are a meticulous corporate researcher who gathers accurate information from trusted sources such as Crunchbase, Wikipedia, and LinkedIn.
   tools:
-    #- serp_api_tool
+    - serp_api_tool
     - wikipedia_tool
   llm: gemini/gemini-2.0-flash
 
@@ -16,7 +16,7 @@ financial_analyst_agent:
   tools:
     - yahoo_finance_tool
     - stock_chart_tool
-    #- serp_api_tool
+    - serp_api_tool
   llm: gemini/gemini-2.0-flash
 
 market_analyst_agent:
@@ -25,7 +25,7 @@ market_analyst_agent:
   backstory: >
     You are a market strategist specializing in competitive analysis and trend discovery.
   tools:
-    #- serp_api_tool
+    - serp_api_tool
   llm: gemini/gemini-2.0-flash
 
 sentiment_agent:
