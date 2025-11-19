@@ -118,6 +118,12 @@ class CompanyResearch():
             config=self.tasks_config['generate_report'], # type: ignore[index]
         )
 
+    @task
+    def revise_report(self) -> Task:
+        return Task(
+            config=self.tasks_config['revise_report'], # type: ignore[index]
+        )
+
     @crew
     def crew(self) -> Crew:
         """Creates the CompanyResearch crew"""

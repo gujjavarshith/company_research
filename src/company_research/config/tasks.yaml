@@ -9,9 +9,20 @@ gather_company_info:
 
 analyze_financials:
   description: >
-    Analyze the {topic} company's financial performance, funding history, stock data, and key metrics.
+    Analyze the {topic} company's financial performance, funding history, stock data, and key metrics. 
+    
+    CRITICAL INSTRUCTIONS:
+    1. Try to use tools to get financial data (yahoo_finance_tool, stock_chart_tool)
+    2. If a tool fails ONCE due to rate limiting or errors, DO NOT retry it. Move on immediately.
+    3. If all tools fail or data is unavailable, you MUST still provide a final answer with the following format:
+       - State that financial data tools were unavailable
+       - Provide general financial analysis based on the company type and industry
+       - Note any known information about the company (e.g., if it's a startup, unicorn, etc.)
+    4. You MUST ALWAYS provide a final answer - never leave the response empty, even if all tools fail.
+    
+    Remember: A response with limitations is better than no response at all.
   expected_output: >
-    Financial insights summarizing revenue, valuation, stock trends, and major funding events.
+    Financial insights in JSON format. Must include: revenue trends, valuation (if known), funding history (if available), stock data (if available), or a clear statement about data limitations with general financial analysis. The output must always be valid JSON, even if it only contains a note about unavailable data.
   agent: financial_analyst_agent
   output_file: data/financials.json
 
@@ -49,3 +60,38 @@ generate_report:
     - analyze_financials
     - analyze_market_position
     - analyze_sentiment
+
+revise_report:
+  description: >
+    IMPORTANT: You are ONLY creating a NEW section to be added to the existing report. You are NOT rewriting the entire report.
+    
+    Read the existing report from reports/{topic}_report.md (provided in input_files) to understand the context and content.
+    
+    Based on the user's feedback: "{user_feedback}", create ONLY a new section that addresses this feedback. 
+    
+    Your output should be ONLY the new section in the following format:
+    
+    ## [Appropriate Section Title Based on Feedback]
+    
+    [Your comprehensive response to the user feedback]
+    
+    CRITICAL RULES:
+    - Output ONLY the new section (starting with ##)
+    - Do NOT include any existing report content
+    - Do NOT rewrite or modify existing sections
+    - Title the section appropriately (e.g., "Investment Analysis", "Leadership Team Details", "Additional Insights", etc.)
+    - Provide a comprehensive, professional response to the user's feedback
+    - Use information from the existing report sections to inform your response
+    
+    Remember: You are creating a NEW section that will be appended to the report. Do NOT output the entire report.
+  expected_output: >
+    ONLY a new Markdown section (starting with ##) that addresses the user feedback. This section will be appended to the existing report. Do NOT include any existing report content in your output.
+  agent: report_writer_agent
+  input_files:
+    - reports/{topic}_report.md
+    - data/company_info.json
+    - data/financials.json
+    - data/market_analysis.json
+    - data/sentiment.json
+  depends_on:
+    - generate_report
