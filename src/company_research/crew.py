@@ -1,7 +1,15 @@
 from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task
+from crewai.project import CrewBase, agent, crew, task, tool
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
+from company_research.tools.custom_tool import (
+    SerpApiTool,
+    WikipediaTool,
+    YahooFinanceTool,
+    GoogleTrendsTool,
+    NewsApiTool,
+    StockChartTool,
+)
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
@@ -19,6 +27,30 @@ class CompanyResearch():
     
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
+    @tool
+    def serp_api_tool(self):
+        return SerpApiTool()
+
+    @tool
+    def wikipedia_tool(self):
+        return WikipediaTool()
+
+    @tool
+    def yahoo_finance_tool(self):
+        return YahooFinanceTool()
+
+    @tool
+    def google_trends_tool(self):
+        return GoogleTrendsTool()
+
+    @tool
+    def news_api_tool(self):
+        return NewsApiTool()
+
+    @tool
+    def stock_chart_tool(self):
+        return StockChartTool()
+
     @agent
     def company_info_agent(self) -> Agent:
         return Agent(

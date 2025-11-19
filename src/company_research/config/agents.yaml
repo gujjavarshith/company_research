@@ -6,17 +6,18 @@ company_info_agent:
   tools:
     - serp_api_tool
     - wikipedia_tool
-  llm: gemini/gemini-2.5-flash
+  llm: gemini/gemini-2.0-flash
 
 financial_analyst_agent:
   role: "Financial Analyst"
-  goal: "Summarize the {topic} company's financial performance, funding rounds, stock metrics, and revenue trends."
+  goal: "Summarize the {topic} company's financial performance, funding rounds, stock metrics, and revenue trends. and also display the chart(stock) if you get the data. you need to keep huge emphasis on the stock data if available. if stock data not available not mention anything about it."
   backstory: >
     You are a data-driven finance professional skilled in analyzing reports, stock data, and financial statements.
   tools:
     - yahoo_finance_tool
+    - stock_chart_tool
     - serp_api_tool
-  llm: gemini/gemini-2.5-flash
+  llm: gemini/gemini-2.0-flash
 
 market_analyst_agent:
   role: "Market & Competitor Analyst"
@@ -25,8 +26,7 @@ market_analyst_agent:
     You are a market strategist specializing in competitive analysis and trend discovery.
   tools:
     - serp_api_tool
-    - google_trends_tool
-  llm: gemini/gemini-2.5-flash
+  llm: gemini/gemini-2.0-flash
 
 sentiment_agent:
   role: "Sentiment Analyst"
@@ -35,8 +35,7 @@ sentiment_agent:
     You specialize in NLP-driven sentiment and tone analysis to interpret public perception of organizations.
   tools:
     - news_api_tool
-    - twitter_scraper_tool
-  llm: gemini/gemini-2.5-flash
+  llm: gemini/gemini-2.0-flash
 
 report_writer_agent:
   role: "Corporate Intelligence Writer"
@@ -44,4 +43,4 @@ report_writer_agent:
   backstory: >
     You are an experienced analyst who synthesizes research into clear, data-backed reports with recommendations.
   tools: []
-  llm: gemini/gemini-2.5-flash
+  llm: gemini/gemini-2.0-flash
